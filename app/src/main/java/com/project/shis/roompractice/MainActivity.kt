@@ -40,18 +40,14 @@ class MainActivity : AppCompatActivity() {
         mRecyclerView.adapter = mAdapter
         mRecyclerView.setHasFixedSize(true) // 이게 뭘까낭?
 
+
+        // 여기에서 데이터를 읽고 쓴다
         doAsync {
             // Get the student list from database
             catList = catDB.catDao().getAll()
 
             uiThread {
                 toast("${catList.size} records found.")
-
-                // Display the students in text view
-//                textView.text = ""
-//                for (student in list){
-//                    textView.append("${student.id} : ${student.fullName} : ${student.result}\n")
-//                }
 
                 mAdapter.setList(catList)
 
@@ -66,5 +62,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+  override fun onDestroy() {
+     catDB.destroyInstance()
+        super.onDestroy()
+    }
 }

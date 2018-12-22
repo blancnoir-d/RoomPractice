@@ -47,7 +47,7 @@ class AddCatActivity : AppCompatActivity() {
 
 
             doAsync {
-                // Put the student in database
+
                 catDb.catDao().insert(newCat)
 
                 uiThread {
